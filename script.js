@@ -2,9 +2,29 @@
 (function () {
   'use strict';
 
+  const localeMap = window.PODPIN_LOCALE_MAP || null;
+
+  // --- Default locale selection on the root page ---
+  if (localeMap && window.location.pathname === '/') {
+    const storedLocale = window.localStorage.getItem('podpin-locale');
+    const browserLocales = [storedLocale, ...(navigator.languages || []), navigator.language].filter(Boolean);
+    const availableLocales = Object.keys(localeMap);
+    const matchedLocale = browserLocales
+      .map((value) => value.toLowerCase())
+      .map((value) => value.split('-')[0])
+      .find((value) => availableLocales.includes(value) && value !== 'en');
+
+    if (matchedLocale) {
+      window.location.replace(localeMap[matchedLocale]);
+      return;
+    }
+  }
+
   // --- Navbar scroll effect ---
   const nav = document.querySelector('.nav');
-  let lastScroll = 0;
+  const navToggle = document.querySelector('.nav-hamburger');
+  const navLinks = document.querySelector('#nav-links');
+  const localeSwitcher = document.querySelector('.locale-switcher');
 
   function handleNavScroll() {
     const scrollY = window.scrollY;
@@ -13,10 +33,23 @@
     } else {
       nav.classList.remove('scrolled');
     }
-    lastScroll = scrollY;
   }
 
   window.addEventListener('scroll', handleNavScroll, { passive: true });
+
+  function closeMobileNav() {
+    nav.classList.remove('nav-open');
+    if (navToggle) {
+      navToggle.setAttribute('aria-expanded', 'false');
+    }
+  }
+
+  if (navToggle) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('nav-open');
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+  }
 
   // --- Scroll-reveal with Intersection Observer ---
   const reveals = document.querySelectorAll('.reveal');
@@ -51,8 +84,29 @@
       const target = document.querySelector(id);
       if (target) {
         e.preventDefault();
+        closeMobileNav();
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     });
+  });
+
+  document.querySelectorAll('[data-locale-link]').forEach((link) => {
+    link.addEventListener('click', () => {
+      const nextLocale = link.getAttribute('data-locale-link');
+      if (nextLocale) {
+        window.localStorage.setItem('podpin-locale', nextLocale);
+      }
+      closeMobileNav();
+      if (localeSwitcher) {
+        localeSwitcher.removeAttribute('open');
+      }
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!localeSwitcher || !localeSwitcher.hasAttribute('open')) return;
+    if (!localeSwitcher.contains(event.target)) {
+      localeSwitcher.removeAttribute('open');
+    }
   });
 })();
