@@ -128,6 +128,7 @@ function renderStatIcon(label) {
 
 function renderPage(locale) {
   const pathname = localePath(locale);
+  const assetPrefix = pathname === '/' ? 'assets' : '../assets';
   const canonical = maybeAbsoluteUrl(pathname);
   const ogImage = maybeAbsoluteUrl(site.ogImage);
   const smartBannerContent = [`app-id=${site.appStoreId}`];
@@ -174,7 +175,8 @@ ${ogUrlTag}
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="${pathname === '/' ? 'styles.css' : '../styles.css'}" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📌</text></svg>" />
+  <link rel="icon" type="image/png" sizes="32x32" href="${assetPrefix}/favicon-32x32.png" />
+  <link rel="apple-touch-icon" href="${assetPrefix}/apple-touch-icon.png" />
 ${localeMapScript}
   <script type="application/ld+json">
 ${renderSchema(locale, pathname)}
@@ -184,10 +186,7 @@ ${renderSchema(locale, pathname)}
   <nav class="nav" id="nav">
     <a href="${pathname}" class="nav-logo" aria-label="${escapeHtml(site.siteName)}">
       <div class="nav-logo-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2C12 2 7 8 7 13a5 5 0 0 0 10 0c0-5-5-11-5-11z"></path>
-          <line x1="12" y1="17" x2="12" y2="22"></line>
-        </svg>
+        <img src="${assetPrefix}/app-icon.png" alt="" aria-hidden="true" width="36" height="36" />
       </div>
       ${escapeHtml(site.siteName)}
     </a>

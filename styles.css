@@ -166,16 +166,18 @@ p {
 .nav-logo-icon {
   width: 36px;
   height: 36px;
-  background: var(--text-primary);
-  border-radius: var(--r-sm);
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
-.nav-logo-icon svg {
-  width: 20px;
-  height: 20px;
+.nav-logo-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .nav-links {
