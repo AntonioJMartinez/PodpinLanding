@@ -4,6 +4,9 @@ import path from 'node:path';
 import site from '../site.config.mjs';
 
 const rootDir = process.cwd();
+const outputDir = process.env.SITE_OUTPUT_DIR
+  ? path.resolve(rootDir, process.env.SITE_OUTPUT_DIR)
+  : rootDir;
 
 function escapeHtml(value) {
   return String(value)
@@ -488,7 +491,7 @@ ${urls}
 }
 
 async function writeFile(relativePath, content) {
-  const outputPath = path.join(rootDir, relativePath);
+  const outputPath = path.join(outputDir, relativePath);
   await fs.mkdir(path.dirname(outputPath), { recursive: true });
   await fs.writeFile(outputPath, content);
 }
@@ -507,7 +510,9 @@ async function build() {
   }
 }
 
-build().catch((error) => {
+try {
+  await build();
+} catch (error) {
   console.error(error);
   process.exitCode = 1;
-});
+}
