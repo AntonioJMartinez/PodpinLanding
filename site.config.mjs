@@ -1,5 +1,5 @@
-// Set SITE_URL at build time to emit absolute canonicals, OG URLs, and sitemap.xml.
-const siteUrl = process.env.SITE_URL?.trim() ?? '';
+// SITE_URL can override the production origin for previews or alternate deployments.
+const siteUrl = (process.env.SITE_URL ?? 'https://getpodpin.com').trim();
 
 const sharedContent = {
   appStoreUrl: 'https://apps.apple.com/app/id6760191862',
@@ -17,6 +17,8 @@ const sharedContent = {
         fr: 'Vue détail du podcast dans Podpin',
         it: 'Vista dettaglio podcast in Podpin',
         de: 'Podcast-Detailansicht in Podpin',
+        pt: 'Vista de detalhes do podcast no Podpin',
+        zh: 'Podpin 播客详情页面',
       },
     },
     {
@@ -27,6 +29,8 @@ const sharedContent = {
         fr: 'Écran de lecture Podpin',
         it: 'Schermata di riproduzione di Podpin',
         de: 'Podpin Wiedergabebildschirm',
+        pt: 'Tela de reprodução do Podpin',
+        zh: 'Podpin 正在播放页面',
       },
     },
     {
@@ -37,6 +41,8 @@ const sharedContent = {
         fr: 'Vue bibliothèque dans Podpin',
         it: 'Vista libreria di Podpin',
         de: 'Podpin Mediatheksansicht',
+        pt: 'Vista da biblioteca do Podpin',
+        zh: 'Podpin 资料库页面',
       },
     },
   ],

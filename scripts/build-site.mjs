@@ -128,7 +128,7 @@ function renderStatIcon(label) {
 
 function renderPage(locale) {
   const pathname = localePath(locale);
-  const assetPrefix = pathname === '/' ? 'assets' : '../assets';
+  const assetPrefix = '/assets';
   const canonical = maybeAbsoluteUrl(pathname);
   const ogImage = maybeAbsoluteUrl(site.ogImage);
   const smartBannerContent = [`app-id=${site.appStoreId}`];
@@ -174,7 +174,7 @@ ${ogUrlTag}
   <meta name="twitter:image" content="${escapeHtml(ogImage)}" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="${pathname === '/' ? 'styles.css' : '../styles.css'}" />
+  <link rel="stylesheet" href="/styles.css" />
   <link rel="icon" type="image/png" sizes="32x32" href="${assetPrefix}/favicon-32x32.png" />
   <link rel="apple-touch-icon" href="${assetPrefix}/apple-touch-icon.png" />
 ${localeMapScript}
@@ -217,17 +217,17 @@ ${renderSchema(locale, pathname)}
 
     <div class="hero-devices">
       <div class="phone-mockup phone-left">
-        <img src="${pathname === '/' ? 'assets' : '../assets'}/podcast-detail-dark.png" alt="${escapeHtml(
+        <img src="/assets/podcast-detail-dark.png" alt="${escapeHtml(
           site.heroImages[0].alt[locale.code]
         )}" loading="eager" />
       </div>
       <div class="phone-mockup phone-center">
-        <img src="${pathname === '/' ? 'assets' : '../assets'}/player.png" alt="${escapeHtml(
+        <img src="/assets/player.png" alt="${escapeHtml(
           site.heroImages[1].alt[locale.code]
         )}" loading="eager" fetchpriority="high" />
       </div>
       <div class="phone-mockup phone-right">
-        <img src="${pathname === '/' ? 'assets' : '../assets'}/library-dark.png" alt="${escapeHtml(
+        <img src="/assets/library-dark.png" alt="${escapeHtml(
           site.heroImages[2].alt[locale.code]
         )}" loading="eager" />
       </div>
@@ -257,7 +257,7 @@ ${renderSchema(locale, pathname)}
 
         <div class="feature-visual">
           <div class="feature-phone">
-            <img src="${pathname === '/' ? 'assets' : '../assets'}/episode-detail.png" alt="${escapeHtml(
+            <img src="/assets/episode-detail.png" alt="${escapeHtml(
               locale.transcripts.imageAlt
             )}" loading="lazy" />
           </div>
@@ -292,7 +292,7 @@ ${renderSchema(locale, pathname)}
 
         <div class="feature-visual">
           <div class="feature-phone">
-            <img src="${pathname === '/' ? 'assets' : '../assets'}/podcast-page.png" alt="${escapeHtml(
+            <img src="/assets/podcast-page.png" alt="${escapeHtml(
               locale.insights.imageAlt
             )}" loading="lazy" />
           </div>
@@ -327,7 +327,7 @@ ${renderSchema(locale, pathname)}
 
         <div class="feature-visual">
           <div class="feature-phone">
-            <img src="${pathname === '/' ? 'assets' : '../assets'}/library-light.png" alt="${escapeHtml(
+            <img src="/assets/library-light.png" alt="${escapeHtml(
               locale.highlights.imageAlt
             )}" loading="lazy" />
           </div>
@@ -369,17 +369,17 @@ ${locale.stats
 
       <div class="device-showcase-row reveal">
         <div class="device-showcase-phone">
-          <img src="${pathname === '/' ? 'assets' : '../assets'}/library-dark.png" alt="${escapeHtml(
+          <img src="/assets/library-dark.png" alt="${escapeHtml(
             locale.platforms.imageAlts[0]
           )}" loading="lazy" />
         </div>
         <div class="device-showcase-phone">
-          <img src="${pathname === '/' ? 'assets' : '../assets'}/podcast-detail-dark.png" alt="${escapeHtml(
+          <img src="/assets/podcast-detail-dark.png" alt="${escapeHtml(
             locale.platforms.imageAlts[1]
           )}" loading="lazy" />
         </div>
         <div class="device-showcase-phone">
-          <img src="${pathname === '/' ? 'assets' : '../assets'}/player.png" alt="${escapeHtml(
+          <img src="/assets/player.png" alt="${escapeHtml(
             locale.platforms.imageAlts[2]
           )}" loading="lazy" />
         </div>
@@ -417,7 +417,7 @@ ${renderLocaleMenu(locale)}
     </div>
   </footer>
 
-  <script src="${pathname === '/' ? 'script.js' : '../script.js'}"></script>
+  <script src="/script.js"></script>
 </body>
 </html>`;
 }

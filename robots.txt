@@ -24,3 +24,5 @@ Allow: /
 
 User-agent: Applebot
 Allow: /
+
+Sitemap: https://getpodpin.com/sitemap.xml
