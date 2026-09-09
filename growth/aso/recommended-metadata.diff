@@ -1,0 +1,34 @@
+# Candidate-only metadata diff for Podpin (App Store ID 6760191862)
+# Baseline: App Store Connect version 1.2, WAITING_FOR_REVIEW
+# Do not apply to version 1.2. Review product fit and use a future editable version.
+# Name and subtitle are intentionally retained; only keyword fields change.
+
+--- metadata/version/1.2/en-US.json (current, 100 chars)
++++ metadata/version/<next-editable-version>/en-US.json (candidate, 69 chars)
+@@ keywords
+-"podcast app,carplay,car play,rss player,transcribe,transcripts,highlights,chapters,rss,audio to text"
++"app,carplay,rss,transcribe,highlights,chapters,read,insights,episodes"
+
+--- metadata/version/1.2/es-ES.json (current, 89 chars)
++++ metadata/version/<next-editable-version>/es-ES.json (candidate, 85 chars)
+@@ keywords
+-"transcribir,resúmenes,destacados,audio texto,offline,capítulos,notas,voz a texto,descubre"
++"transcribir,destacados,audio texto,offline,capítulos,notas,voz a texto,app,marcadores"
+
+--- metadata/version/1.2/de-DE.json (current, 80 chars)
++++ metadata/version/<next-editable-version>/de-DE.json (candidate, 90 chars)
+@@ keywords
+-"transkribieren,transkription,notizen,audio text,offline,folgen,suche,kapitel,rss"
++"audio,notizen,offline,folgen,suche,kapitel,rss,transkription,transkribieren,highlights,app"
+
+--- metadata/version/1.2/fr-FR.json (current, 89 chars)
++++ metadata/version/<next-editable-version>/fr-FR.json (candidate, 88 chars)
+@@ keywords
+-"transcrire,transcriptions,surlignage,notes,texte audio,hors ligne,chapitres,rss,découvrir"
++"transcrire,surlignage,notes,texte audio,hors ligne,chapitres,rss,lecteur audio,infos,app"
+
+Review notes:
+- All candidate values are <=100 characters and contain no spaces after commas.
+- Proposed additions are limited to terms with an Astro tracked-keyword or competitor-gap signal captured in recommended-metadata.json.
+- `books`, `libros`, `livres`, `bücher`, and `clips` are explicitly excluded because the extraction does not verify product fit; en-US `notes` and `bookmarks` are left out because they already occur in the subtitle.
+- Competitor-brand terms and broad/unsupported suggestions (for example Spotify, Apple, Podimo, YouTube, music, radio) are excluded.

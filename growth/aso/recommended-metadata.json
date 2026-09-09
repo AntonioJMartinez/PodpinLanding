@@ -1,0 +1,296 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-30",
+  "app": {
+    "appStoreId": "6760191862",
+    "bundleId": "com.ajms.Podcast",
+    "name": "AI Podcast Player : Podpin",
+    "baselineVersion": "1.2",
+    "versionId": "f784c9f6-d747-4ffc-8f7a-53bd25f7902c",
+    "versionState": "WAITING_FOR_REVIEW",
+    "recommendationStatus": "candidate_only_no_live_mutation"
+  },
+  "candidatePolicy": "Review product fit and localization quality, then apply only to a future editable App Store version. This file is not an App Store Connect apply payload.",
+  "explicitlyExcludedTerms": {
+    "terms": [
+      "books",
+      "libros",
+      "livres",
+      "bücher",
+      "clips"
+    ],
+    "rationale": "Books/libros/livres/bücher/clips were not verified as product capabilities; en-US notes/bookmarks already occur in the subtitle, so unused keyword space is preferred to unsupported or duplicate terms."
+  },
+  "fieldLimits": {
+    "name": 30,
+    "subtitle": 30,
+    "keywords": 100
+  },
+  "liveUrls": {
+    "marketingUrl": null,
+    "supportUrl": "https://www.notion.so/31f34bbaf0bc8092aba8d66866d0a2f5",
+    "privacyPolicyUrl": "https://recondite-muenster-de4.notion.site/Privacy-Policy-Podpin-31f34bbaf0bc80f9a4dbcdc5e5dc6f91?source=copy_link"
+  },
+  "sources": [
+    {
+      "type": "App Store Connect canonical export",
+      "command": "asc metadata pull --app 6760191862 --version 1.2 --platform IOS --dir ./metadata",
+      "retrievedDateUtc": "2026-08-30",
+      "paths": [
+        "metadata/app-info/{locale}.json",
+        "metadata/version/1.2/{locale}.json"
+      ]
+    },
+    {
+      "type": "App Store Connect offline validation",
+      "command": "asc metadata validate --dir ./metadata",
+      "filesScanned": 44,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "type": "App Store Connect live keyword audit",
+      "command": "asc metadata keywords audit --app 6760191862 --version 1.2 --platform IOS",
+      "errors": 0,
+      "warnings": 34,
+      "infos": 33
+    },
+    {
+      "type": "Astro tracked keyword baseline",
+      "appId": "6760191862",
+      "trackedKeywordCount": 515,
+      "trackedStoreCount": 22,
+      "lastUpdateUtc": "2026-08-30T07:06:28Z",
+      "scopedStores": [
+        "us",
+        "es",
+        "de",
+        "fr"
+      ]
+    }
+  ],
+  "locales": {
+    "en-US": {
+      "fields": {
+        "name": {
+          "current": "AI Podcast Player : Podpin",
+          "proposed": "AI Podcast Player : Podpin",
+          "currentLength": 26,
+          "proposedLength": 26,
+          "change": "retain"
+        },
+        "subtitle": {
+          "current": "Summaries, Bookmarks, Notes",
+          "proposed": "Summaries, Bookmarks, Notes",
+          "currentLength": 27,
+          "proposedLength": 27,
+          "change": "retain"
+        },
+        "keywords": {
+          "current": "podcast app,carplay,car play,rss player,transcribe,transcripts,highlights,chapters,rss,audio to text",
+          "proposed": "app,carplay,rss,transcribe,highlights,chapters,read,insights,episodes",
+          "currentLength": 100,
+          "proposedLength": 69,
+          "remove": [
+            "podcast app",
+            "car play",
+            "rss player",
+            "transcripts",
+            "audio to text"
+          ],
+          "add": [
+            "app",
+            "read",
+            "insights",
+            "episodes"
+          ],
+          "evidence": [
+            {
+              "term": "app",
+              "source": "Astro extract_competitors_keywords seed=podcast app",
+              "popularity": 66,
+              "freshness": "2026-02-27T12:11:58Z; refresh before use"
+            },
+            {
+              "term": "read",
+              "source": "Astro get_app_keywords",
+              "popularity": 53,
+              "currentRanking": 1000,
+              "freshness": "2026-08-30T08:13:12Z"
+            },
+            {
+              "term": "insights",
+              "source": "Astro get_app_keywords",
+              "popularity": 6,
+              "currentRanking": 1000,
+              "freshness": "2026-08-30T08:13:15Z"
+            },
+            {
+              "term": "episodes",
+              "source": "Astro get_app_keywords phrase=podcast episodes",
+              "popularity": 5,
+              "currentRanking": 131,
+              "freshness": "2026-08-30T08:16:23Z"
+            }
+          ]
+        }
+      }
+    },
+    "es-ES": {
+      "fields": {
+        "name": {
+          "current": "Reproductor Podcast : Podpin",
+          "proposed": "Reproductor Podcast : Podpin",
+          "currentLength": 28,
+          "proposedLength": 28,
+          "change": "retain"
+        },
+        "subtitle": {
+          "current": "AI Transcripción y Resúmenes",
+          "proposed": "AI Transcripción y Resúmenes",
+          "currentLength": 28,
+          "proposedLength": 28,
+          "change": "retain"
+        },
+        "keywords": {
+          "current": "transcribir,resúmenes,destacados,audio texto,offline,capítulos,notas,voz a texto,descubre",
+          "proposed": "transcribir,destacados,audio texto,offline,capítulos,notas,voz a texto,app,marcadores",
+          "currentLength": 89,
+          "proposedLength": 85,
+          "remove": [
+            "resúmenes",
+            "descubre"
+          ],
+          "add": [
+            "app",
+            "marcadores"
+          ],
+          "evidence": [
+            {
+              "term": "app",
+              "source": "Astro extract_competitors_keywords seed=podcast app",
+              "popularity": 57,
+              "freshness": "2026-08-30T08:22:19Z"
+            },
+            {
+              "term": "marcadores",
+              "source": "Astro get_app_keywords",
+              "popularity": 19,
+              "currentRanking": 1000,
+              "freshness": "2026-08-30T08:13:50Z"
+            }
+          ]
+        }
+      }
+    },
+    "de-DE": {
+      "fields": {
+        "name": {
+          "current": "Podcast Player : Podpin",
+          "proposed": "Podcast Player : Podpin",
+          "currentLength": 23,
+          "proposedLength": 23,
+          "change": "retain"
+        },
+        "subtitle": {
+          "current": "Transkript & Lesezeichen",
+          "proposed": "Transkript & Lesezeichen",
+          "currentLength": 24,
+          "proposedLength": 24,
+          "change": "retain"
+        },
+        "keywords": {
+          "current": "transkribieren,transkription,notizen,audio text,offline,folgen,suche,kapitel,rss",
+          "proposed": "audio,notizen,offline,folgen,suche,kapitel,rss,transkription,transkribieren,highlights,app",
+          "currentLength": 80,
+          "proposedLength": 90,
+          "remove": [
+            "audio text"
+          ],
+          "add": [
+            "audio",
+            "highlights",
+            "app"
+          ],
+          "evidence": [
+            {
+              "term": "audio",
+              "source": "Astro get_app_keywords",
+              "popularity": 53,
+              "currentRanking": 1000,
+              "freshness": "2026-08-30T08:22:35Z"
+            },
+            {
+              "term": "highlights",
+              "source": "Astro get_app_keywords",
+              "popularity": 24,
+              "currentRanking": 1000,
+              "freshness": "2026-08-30T08:13:32Z"
+            },
+            {
+              "term": "app",
+              "source": "Astro extract_competitors_keywords seed=podcast app",
+              "popularity": 60,
+              "freshness": "2026-08-30T08:14:01Z"
+            }
+          ]
+        }
+      }
+    },
+    "fr-FR": {
+      "fields": {
+        "name": {
+          "current": "Lecteur podcast : Podpin",
+          "proposed": "Lecteur podcast : Podpin",
+          "currentLength": 24,
+          "proposedLength": 24,
+          "change": "retain"
+        },
+        "subtitle": {
+          "current": "Transcription et signets",
+          "proposed": "Transcription et signets",
+          "currentLength": 24,
+          "proposedLength": 24,
+          "change": "retain"
+        },
+        "keywords": {
+          "current": "transcrire,transcriptions,surlignage,notes,texte audio,hors ligne,chapitres,rss,découvrir",
+          "proposed": "transcrire,surlignage,notes,texte audio,hors ligne,chapitres,rss,lecteur audio,infos,app",
+          "currentLength": 89,
+          "proposedLength": 88,
+          "remove": [
+            "transcriptions",
+            "découvrir"
+          ],
+          "add": [
+            "lecteur audio",
+            "infos",
+            "app"
+          ],
+          "evidence": [
+            {
+              "term": "lecteur audio",
+              "source": "Astro get_app_keywords",
+              "popularity": 16,
+              "currentRanking": 1000,
+              "freshness": "2026-08-30T08:22:27Z"
+            },
+            {
+              "term": "infos",
+              "source": "Astro get_app_keywords",
+              "popularity": 26,
+              "currentRanking": 1000,
+              "freshness": "2026-08-30T08:22:31Z"
+            },
+            {
+              "term": "app",
+              "source": "Astro extract_competitors_keywords seed=podcast",
+              "popularity": 59,
+              "freshness": "2026-08-30T08:13:52Z"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
