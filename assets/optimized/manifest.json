@@ -1,0 +1,69 @@
+{
+  "player": {
+    "width": 1206,
+    "height": 2622,
+    "widths": [
+      320,
+      640,
+      960
+    ]
+  },
+  "episode-detail": {
+    "width": 1206,
+    "height": 2622,
+    "widths": [
+      320,
+      640,
+      960
+    ]
+  },
+  "library-dark": {
+    "width": 1206,
+    "height": 2622,
+    "widths": [
+      320,
+      640,
+      960
+    ]
+  },
+  "library-light": {
+    "width": 1206,
+    "height": 2622,
+    "widths": [
+      320,
+      640,
+      960
+    ]
+  },
+  "podcast-detail-dark": {
+    "width": 1206,
+    "height": 2622,
+    "widths": [
+      320,
+      640,
+      960
+    ]
+  },
+  "podcast-detail-light": {
+    "width": 1206,
+    "height": 2622,
+    "widths": [
+      320,
+      640,
+      960
+    ]
+  },
+  "podcast-page": {
+    "width": 1206,
+    "height": 2622,
+    "widths": [
+      320,
+      640,
+      960
+    ]
+  },
+  "app-icon": {
+    "width": 256,
+    "height": 256
+  }
+}
