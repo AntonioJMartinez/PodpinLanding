@@ -10,7 +10,7 @@ await fs.mkdir(outputDir, { recursive: true });
 process.env.SITE_OUTPUT_DIR = 'dist';
 await import('./build-site.mjs');
 
-for (const file of ['styles.css', 'script.js']) {
+for (const file of ['styles.css', 'script.js', 'BingSiteAuth.xml']) {
   await fs.copyFile(path.join(rootDir, file), path.join(outputDir, file));
 }
 
