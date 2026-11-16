@@ -154,7 +154,7 @@ await write('robots.txt', `User-agent: *\nAllow: /\n\n${preview ? '# Local previ
 await write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">${(preview ? [] : pages).map(page => `<url><loc>${e(abs(route(page.slug, page.locale)))}</loc>${page.updated ? `<lastmod>${page.updated}</lastmod>` : ''}${variants(page).map(item => `<xhtml:link rel="alternate" hreflang="${locales.get(item.locale).htmlLang}" href="${e(abs(route(item.slug, item.locale)))}" />`).join('')}<xhtml:link rel="alternate" hreflang="x-default" href="${e(abs(route(page.slug)))}" /></url>`).join('')}</urlset>\n`);
 await write('.nojekyll', '');
 if (!preview) await write('CNAME', `${origin.hostname}\n`);
-for (const name of ['styles.css', 'seo.css', 'script.js']) await write(name, await fs.readFile(path.join(root, name)));
+for (const name of ['styles.css', 'seo.css', 'script.js', 'BingSiteAuth.xml']) await write(name, await fs.readFile(path.join(root, name)));
 for (const name of ['app-icon.png', 'apple-touch-icon.png', 'favicon-32x32.png']) await write(`assets/${name}`, await fs.readFile(path.join(root, 'assets', name)));
 for (const name of (await fs.readdir(path.join(root, 'assets/optimized'))).filter(name => name.endsWith('.webp'))) await write(`assets/optimized/${name}`, await fs.readFile(path.join(root, 'assets/optimized', name)));
 await write('_headers', '/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n/assets/*\n  Cache-Control: public, max-age=86400, must-revalidate\n');
