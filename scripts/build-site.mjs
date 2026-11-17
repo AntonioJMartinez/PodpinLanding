@@ -154,6 +154,14 @@ await write('robots.txt', `User-agent: *\nAllow: /\n\n${preview ? '# Local previ
 await write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">${(preview ? [] : pages).map(page => `<url><loc>${e(abs(route(page.slug, page.locale)))}</loc>${page.updated ? `<lastmod>${page.updated}</lastmod>` : ''}${variants(page).map(item => `<xhtml:link rel="alternate" hreflang="${locales.get(item.locale).htmlLang}" href="${e(abs(route(item.slug, item.locale)))}" />`).join('')}<xhtml:link rel="alternate" hreflang="x-default" href="${e(abs(route(page.slug)))}" /></url>`).join('')}</urlset>\n`);
 await write('.nojekyll', '');
 if (!preview) await write('CNAME', `${origin.hostname}\n`);
+const INDEXNOW_KEY = '3e122ef193bfdaa88fabd884c6a85c25';
+if (!preview) await write(`${INDEXNOW_KEY}.txt`, INDEXNOW_KEY);
+if (!preview) {
+  const groupNames = { features: 'Features', guides: 'Guides', compare: 'Comparisons', trust: 'About and support' };
+  const english = pages.filter(page => page.locale === 'en' && !['home', 'hub'].includes(page.group));
+  const sections = [...new Set(english.map(page => page.group))].map(group => `## ${groupNames[group] ?? group}\n\n${english.filter(page => page.group === group).map(page => `- [${page.title.replace(/ \| Podpin$/, '')}](${abs(route(page.slug, page.locale))}): ${page.description}`).join('\n')}`);
+  await write('llms.txt', `# Podpin\n\n> Podpin is an AI podcast player for iPhone, iPad and Mac. It transcribes episodes, summarizes them, and lets you pin highlights and notes so you can remember and find what you heard.\n\nOfficial website: ${abs('/')}\nApp Store: https://apps.apple.com/app/id6760191862\nThe linked pages are the primary public references for Podpin features, guides and comparisons.\n\n${sections.join('\n\n')}\n\n## Other languages\n\n- [Español](${abs('/es/')})\n- [Deutsch](${abs('/de/')})\n- [Français](${abs('/fr/')})\n`);
+}
 for (const name of ['styles.css', 'seo.css', 'script.js']) await write(name, await fs.readFile(path.join(root, name)));
 for (const name of ['app-icon.png', 'apple-touch-icon.png', 'favicon-32x32.png']) await write(`assets/${name}`, await fs.readFile(path.join(root, 'assets', name)));
 for (const name of (await fs.readdir(path.join(root, 'assets/optimized'))).filter(name => name.endsWith('.webp'))) await write(`assets/optimized/${name}`, await fs.readFile(path.join(root, 'assets/optimized', name)));
