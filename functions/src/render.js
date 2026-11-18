@@ -38,7 +38,7 @@ export function renderSharePage({ shareURL, appURL, episode, timestamp }) {
     ? (episode.description || `Listen to ${episode.title}${showTitle ? ` from ${showTitle}` : ''} in Podpin.`)
     : 'Open this episode in Podpin, the podcast player for transcripts, pins and highlights.';
   const ogTitle = moment ? `${title} · ${moment}` : title;
-  const image = episode?.artworkURL || 'https://getpodpin.com/assets/app-icon.png';
+  const image = episode?.artworkURL || `${new URL(shareURL).origin}/assets/app-icon.png`;
   const audioSrc = episode?.audioURL ? `${episode.audioURL}${moment ? `#t=${Math.floor(timestamp)}` : ''}` : null;
   return `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">

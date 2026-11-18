@@ -66,13 +66,13 @@ test('registration rejects mismatched or malformed input', () => {
   assert.equal(validateRegistration({ id, kind: 'podcast', feedURL }).error, 'unsupported kind');
 });
 
-function call(handler, { method = 'GET', path, query = {}, body }) {
+function call(handler, { method = 'GET', path, query = {}, body, headers = {} }) {
   const res = { statusCode: 0, headers: {}, payload: null };
   res.set = (key, value) => { res.headers[key.toLowerCase()] = value; return res; };
   res.status = code => { res.statusCode = code; return res; };
   res.json = value => { res.payload = value; return res; };
   res.send = value => { res.payload = value; return res; };
-  return handler({ method, path, query, body }, res).then(() => res);
+  return handler({ method, path, query, body, headers }, res).then(() => res);
 }
 
 test('register → resolve → render round trip with metadata caching', async () => {
@@ -98,6 +98,17 @@ test('register → resolve → render round trip with metadata caching', async (
   assert.match(page.headers['cache-control'], /s-maxage=86400/);
   await call(handler, { path: `/e/${id}` });
   assert.equal(fetches, 1, 'metadata is cached in the store');
+});
+
+test('links use the allowed request host and ignore spoofed hosts', async () => {
+  const handler = createHandler({ store: memoryStore(), loadFeed: async () => FEED });
+  const feedURL = 'https://feeds.example.com/show.xml';
+  const id = episodeShareID(feedURL, 'ep-2', null);
+  const body = { id, kind: 'episode', feedURL, guid: 'ep-2' };
+  const viaWebApp = await call(handler, { method: 'POST', path: '/api/shares', body, headers: { 'x-forwarded-host': 'podcast-ajms.web.app' } });
+  assert.equal(viaWebApp.payload.url, `https://podcast-ajms.web.app/e/${id}`);
+  const spoofed = await call(handler, { path: `/e/${id}`, headers: { 'x-forwarded-host': 'evil.example' } });
+  assert.match(spoofed.payload, /<link rel="canonical" href="https:\/\/getpodpin.com\/e\//);
 });
 
 test('unknown IDs still render a friendly page and bad paths 404', async () => {

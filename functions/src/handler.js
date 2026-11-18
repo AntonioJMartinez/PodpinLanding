@@ -3,6 +3,16 @@ import { extractEpisode, fetchFeedText } from './feed.js';
 import { legacyAppURL, renderSharePage } from './render.js';
 
 export const SITE_ORIGIN = 'https://getpodpin.com';
+// Hosts that serve this function through Firebase Hosting. Links and canonical URLs use the
+// host the request arrived on, so the web.app test domain produces web.app links.
+const ALLOWED_HOSTS = new Set(['getpodpin.com', 'www.getpodpin.com', 'podcast-ajms.web.app', 'podcast-ajms.firebaseapp.com']);
+
+export function originFor(req) {
+  const header = req.get?.('x-forwarded-host') ?? req.headers?.['x-forwarded-host'] ?? '';
+  const host = String(header).split(',')[0].trim().toLowerCase();
+  if (host === 'www.getpodpin.com') return SITE_ORIGIN;
+  return ALLOWED_HOSTS.has(host) ? `https://${host}` : SITE_ORIGIN;
+}
 const META_TTL_MS = 7 * 24 * 60 * 60 * 1000;
 const MAX_TIMESTAMP = 48 * 60 * 60;
 
@@ -75,7 +85,7 @@ export function createHandler({ store, loadFeed = fetchFeedText, now = () => Dat
       const { error, record } = validateRegistration(req.body);
       if (error) return res.status(400).json({ error });
       await store.create(req.body.id, record, now());
-      return res.status(200).json({ id: req.body.id, url: `${SITE_ORIGIN}/e/${req.body.id}` });
+      return res.status(200).json({ id: req.body.id, url: `${originFor(req)}/e/${req.body.id}` });
     }
 
     const apiMatch = path.match(/^\/api\/shares\/([^/]+)$/);
@@ -94,7 +104,7 @@ export function createHandler({ store, loadFeed = fetchFeedText, now = () => Dat
     if ((req.method === 'GET' || req.method === 'HEAD') && pageMatch) {
       const id = pageMatch[1];
       const timestamp = parseTimestamp(req.query?.t);
-      const shareURL = `${SITE_ORIGIN}/e/${id}${timestamp ? `?t=${Math.floor(timestamp)}` : ''}`;
+      const shareURL = `${originFor(req)}/e/${id}${timestamp ? `?t=${Math.floor(timestamp)}` : ''}`;
       const record = await lookup(id);
       const episode = record ? await episodeMetadata(id, record) : null;
       res.set('Content-Type', 'text/html; charset=utf-8');
