@@ -153,6 +153,7 @@ await write('404.html', `${head(missing, true)}<main id="main" class="content-sh
 await write('robots.txt', `User-agent: *\nAllow: /\n\n${preview ? '# Local preview: all HTML pages are noindex.\n' : `Sitemap: ${abs('/sitemap.xml')}\n`}`);
 await write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">${(preview ? [] : pages).map(page => `<url><loc>${e(abs(route(page.slug, page.locale)))}</loc>${page.updated ? `<lastmod>${page.updated}</lastmod>` : ''}${variants(page).map(item => `<xhtml:link rel="alternate" hreflang="${locales.get(item.locale).htmlLang}" href="${e(abs(route(item.slug, item.locale)))}" />`).join('')}<xhtml:link rel="alternate" hreflang="x-default" href="${e(abs(route(page.slug)))}" /></url>`).join('')}</urlset>\n`);
 await write('.nojekyll', '');
+await write('.well-known/apple-app-site-association', `${JSON.stringify({ applinks: { details: [{ appIDs: site.appleAppIDs, components: site.universalLinkPaths.map(pattern => ({ '/': pattern })) }] } }, null, 2)}\n`);
 if (!preview) await write('CNAME', `${origin.hostname}\n`);
 const INDEXNOW_KEY = '3e122ef193bfdaa88fabd884c6a85c25';
 if (!preview) await write(`${INDEXNOW_KEY}.txt`, INDEXNOW_KEY);

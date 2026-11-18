@@ -1,0 +1,50 @@
+name: Deploy Podpin to Firebase
+
+# Manual until getpodpin.com DNS points at Firebase Hosting; then add `push: branches: [main]`
+# and retire deploy.yml (GitHub Pages).
+on:
+  workflow_dispatch:
+    inputs:
+      only:
+        description: firebase deploy --only targets
+        default: hosting,functions,firestore
+        required: true
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: firebase-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      SITE_URL: https://getpodpin.com
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+      - name: Site tests and build
+        run: |
+          npm ci
+          npm test
+          npm run build:site
+          npm run check:site
+      - name: Share function tests
+        working-directory: functions
+        run: |
+          npm ci
+          npm test
+      # Workload Identity Federation: no long-lived key in GitHub. Set the repository
+      # variables GCP_WORKLOAD_IDENTITY_PROVIDER and GCP_DEPLOY_SERVICE_ACCOUNT.
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.GCP_DEPLOY_SERVICE_ACCOUNT }}
+      - name: Deploy
+        run: npx --yes firebase-tools@15 deploy --only "${{ inputs.only }}" --project podcast-ajms --non-interactive --force
