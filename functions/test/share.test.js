@@ -100,13 +100,13 @@ test('register → resolve → render round trip with metadata caching', async (
   assert.equal(fetches, 1, 'metadata is cached in the store');
 });
 
-test('links use the allowed request host and ignore spoofed hosts', async () => {
+test('links are always canonical getpodpin.com URLs', async () => {
   const handler = createHandler({ store: memoryStore(), loadFeed: async () => FEED });
   const feedURL = 'https://feeds.example.com/show.xml';
   const id = episodeShareID(feedURL, 'ep-2', null);
   const body = { id, kind: 'episode', feedURL, guid: 'ep-2' };
   const viaWebApp = await call(handler, { method: 'POST', path: '/api/shares', body, headers: { 'x-forwarded-host': 'podcast-ajms.web.app' } });
-  assert.equal(viaWebApp.payload.url, `https://podcast-ajms.web.app/e/${id}`);
+  assert.equal(viaWebApp.payload.url, `https://getpodpin.com/e/${id}`);
   const spoofed = await call(handler, { path: `/e/${id}`, headers: { 'x-forwarded-host': 'evil.example' } });
   assert.match(spoofed.payload, /<link rel="canonical" href="https:\/\/getpodpin.com\/e\//);
 });

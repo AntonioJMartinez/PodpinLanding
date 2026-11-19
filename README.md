@@ -82,4 +82,4 @@ SITE_URL=https://getpodpin.com npm run build:site
 firebase emulators:start --only hosting,functions
 ```
 
-Deploys use `.github/workflows/firebase-deploy.yml` (manual for now). GitHub Pages (`deploy.yml`) stays live until DNS moves to Firebase.
+getpodpin.com and www.getpodpin.com (redirect) are served by Firebase Hosting; GitHub Pages is retired. Deploy with `firebase deploy --only hosting,functions,firestore --project podcast-ajms` after `npm run build:site`, or run `.github/workflows/firebase-deploy.yml` once its Workload Identity Federation variables are set.
