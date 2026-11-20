@@ -4,6 +4,9 @@ const siteUrl = (process.env.SITE_URL ?? 'https://getpodpin.com').trim();
 const sharedContent = {
   appStoreUrl: 'https://apps.apple.com/app/id6760191862',
   appStoreId: '6760191862',
+  // Universal links: Team ID + bundle ID of the Podpin app (iOS and macOS share it).
+  appleAppIDs: ['Z8LEPS7UL9.com.ajms.Podcast'],
+  universalLinkPaths: ['/e/*'],
   privacyPolicyUrl: 'https://www.notion.so/31f34bbaf0bc80f9a4dbcdc5e5dc6f91',
   ogImage: '/assets/screenshot-extra.jpg',
   ogImageWidth: 1024,

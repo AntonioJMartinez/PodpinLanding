@@ -76,6 +76,13 @@ export async function auditSite(directory = fileURLToPath(new URL('../dist/', im
   const robotsFile = await fs.readFile(path.join(directory, 'robots.txt'), 'utf8');
   check(manifest.preview ? !/^Sitemap:/m.test(robotsFile) : robotsFile.includes(`Sitemap: ${manifest.origin}/sitemap.xml`), 'Wrong robots sitemap declaration');
   check(manifest.files.includes('.nojekyll'), 'Missing GitHub Pages .nojekyll file');
+  try {
+    const association = JSON.parse(await fs.readFile(path.join(directory, '.well-known/apple-app-site-association'), 'utf8'));
+    const details = association.applinks?.details ?? [];
+    check(details.some(item => item.appIDs?.includes('Z8LEPS7UL9.com.ajms.Podcast') && item.components?.some(component => component['/'] === '/e/*')), 'apple-app-site-association must route /e/* to Podpin');
+  } catch {
+    errors.push('Missing or invalid .well-known/apple-app-site-association');
+  }
   if (!manifest.preview) {
     check(manifest.files.includes('CNAME'), 'Missing GitHub Pages CNAME file');
     check((await fs.readFile(path.join(directory, 'CNAME'), 'utf8')).trim() === new URL(manifest.origin).hostname, 'CNAME does not match production origin');

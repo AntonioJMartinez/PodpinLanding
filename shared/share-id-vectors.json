@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "algorithm": "base64url(SHA-256(\"e1\\n\" + normalizedFeed + \"\\n\" + (\"g:\" + guid | \"a:\" + normalizedAudio))[0..<12]); podcasts use \"p1\\n\" + normalizedFeed",
+  "episodes": [
+    {
+      "feedURL": "https://feeds.example.com/show.xml",
+      "guid": "episode-42",
+      "audioURL": null,
+      "normalizedFeedURL": "https://feeds.example.com/show.xml",
+      "id": "y6wpRCxUM_Ch6ChO"
+    },
+    {
+      "feedURL": "HTTP://Feeds.Example.com:80/show.xml#frag",
+      "guid": "  episode-42\n",
+      "audioURL": null,
+      "normalizedFeedURL": "https://feeds.example.com/show.xml",
+      "id": "y6wpRCxUM_Ch6ChO"
+    },
+    {
+      "feedURL": "https://feeds.example.com:443/show.xml",
+      "guid": "episode-42",
+      "audioURL": "https://cdn.example.com/a.mp3",
+      "normalizedFeedURL": "https://feeds.example.com/show.xml",
+      "id": "y6wpRCxUM_Ch6ChO"
+    },
+    {
+      "feedURL": "https://feeds.example.com/show.xml?format=rss&id=7",
+      "guid": "urn:uuid:5D3F3E3A-1B2C-4D5E-9F00-ABCDEF012345",
+      "audioURL": null,
+      "normalizedFeedURL": "https://feeds.example.com/show.xml?format=rss&id=7",
+      "id": "SNCvP7Jlt8eco0Aw"
+    },
+    {
+      "feedURL": "https://feeds.example.com",
+      "guid": "",
+      "audioURL": "https://CDN.example.com/audio/ep%2042.mp3?x=1#t=3",
+      "normalizedFeedURL": "https://feeds.example.com/",
+      "id": "Bj2QgvsZI3wBuS16"
+    },
+    {
+      "feedURL": "https://feeds.example.com/",
+      "guid": null,
+      "audioURL": "http://cdn.example.com/audio/ep%2042.mp3?x=1",
+      "normalizedFeedURL": "https://feeds.example.com/",
+      "id": "Bj2QgvsZI3wBuS16"
+    },
+    {
+      "feedURL": "https://feeds.example.com/ünïcode/feed",
+      "guid": "Épisode — 7 🎧",
+      "audioURL": null,
+      "normalizedFeedURL": "https://feeds.example.com/ünïcode/feed",
+      "id": "IcMJgc8jtbwJbYsu"
+    },
+    {
+      "feedURL": "ftp://feeds.example.com/show.xml",
+      "guid": "x",
+      "audioURL": null,
+      "normalizedFeedURL": null,
+      "id": null
+    },
+    {
+      "feedURL": "https://user@feeds.example.com/show.xml",
+      "guid": "x",
+      "audioURL": null,
+      "normalizedFeedURL": null,
+      "id": null
+    },
+    {
+      "feedURL": "https://feeds.example.com/show.xml",
+      "guid": "   ",
+      "audioURL": null,
+      "normalizedFeedURL": "https://feeds.example.com/show.xml",
+      "id": null
+    }
+  ],
+  "podcasts": [
+    {
+      "feedURL": "https://feeds.example.com/show.xml",
+      "id": "nYTj186KhQqrXFt_"
+    },
+    {
+      "feedURL": "http://FEEDS.example.com/show.xml",
+      "id": "nYTj186KhQqrXFt_"
+    },
+    {
+      "feedURL": "https://feeds.example.com/other.xml",
+      "id": "laR6rphofan1yJdn"
+    }
+  ]
+}
