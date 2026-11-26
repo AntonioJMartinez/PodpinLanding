@@ -4,6 +4,13 @@ const siteUrl = (process.env.SITE_URL ?? 'https://getpodpin.com').trim();
 const sharedContent = {
   appStoreUrl: 'https://apps.apple.com/app/id6760191862',
   appStoreId: '6760191862',
+  // Verified on the US App Store listing (lookup API + product page) on 2026-11-26. Re-check before changing.
+  appVersion: '1.3.5',
+  pricesChecked: '2026-11-26',
+  subscriptions: [
+    { name: 'Monthly Plan', price: '5.99', unitCode: 'MON' },
+    { name: 'Annual Plan', price: '24.99', unitCode: 'ANN' },
+  ],
   // Universal links: Team ID + bundle ID of the Podpin app (iOS and macOS share it).
   appleAppIDs: ['Z8LEPS7UL9.com.ajms.Podcast'],
   universalLinkPaths: ['/e/*'],

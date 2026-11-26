@@ -30,7 +30,8 @@ export async function auditSite(directory = fileURLToPath(new URL('../dist/', im
     check(document.querySelectorAll('link[rel="canonical"]').length === 1, `${page.path}: expected one canonical`);
     check(document.querySelectorAll('script[type="application/ld+json"]').length > 0, `${page.path}: missing structured data`);
     const robots = document.querySelector('meta[name="robots"]')?.content || '';
-    check(manifest.preview ? robots.includes('noindex') : !robots.includes('noindex'), `${page.path}: wrong indexing policy`);
+    check(manifest.preview || page.noindex ? robots.includes('noindex') : !robots.includes('noindex'), `${page.path}: wrong indexing policy`);
+    if (page.noindex) check(!document.querySelector('link[hreflang]'), `${page.path}: noindex page must not declare hreflang alternates`);
     check(document.querySelector('.nav-disclosure')?.hasAttribute('open'), `${page.path}: no-JS navigation unavailable`);
     for (const node of document.querySelectorAll('script[type="application/ld+json"]')) {
       try { check(JSON.parse(node.textContent)['@graph']?.length > 0, `${page.path}: missing schema graph`); }
@@ -71,7 +72,8 @@ export async function auditSite(directory = fileURLToPath(new URL('../dist/', im
   const sitemap = await fs.readFile(path.join(directory, 'sitemap.xml'), 'utf8');
   const xml = new DOMParser().parseFromString(sitemap, 'text/xml');
   const locations = [...xml.querySelectorAll('url > loc')].map(node => node.textContent);
-  const expected = manifest.preview ? [] : [...docs.keys()].map(route => `${manifest.origin}${route}`);
+  const noindexed = new Set(manifest.pages.filter(page => page.noindex).map(page => page.path));
+  const expected = manifest.preview ? [] : [...docs.keys()].filter(route => !noindexed.has(route)).map(route => `${manifest.origin}${route}`);
   check(locations.length === expected.length && new Set(locations).size === locations.length && expected.every(url => locations.includes(url)), 'Sitemap URLs must exactly match canonical pages');
   const robotsFile = await fs.readFile(path.join(directory, 'robots.txt'), 'utf8');
   check(manifest.preview ? !/^Sitemap:/m.test(robotsFile) : robotsFile.includes(`Sitemap: ${manifest.origin}/sitemap.xml`), 'Wrong robots sitemap declaration');
