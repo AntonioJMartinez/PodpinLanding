@@ -1,6 +1,7 @@
 {
   "hosting": {
     "public": "dist",
+    "predeploy": ["npm --prefix \"$PROJECT_DIR\" run deploy:prepare"],
     "ignore": ["build-manifest.json", "_headers", "CNAME", ".nojekyll", "**/.DS_Store"],
     "headers": [
       {
