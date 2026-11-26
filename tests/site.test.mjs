@@ -32,7 +32,7 @@ test('production origin guards, production SEO, campaign attribution, and previe
   const result = await auditSite();
   assert.equal(parseHTML(await fs.readFile('dist/index.html', 'utf8')).document.querySelector('meta[name="google-site-verification"]'), null);
   assert.equal(result.preview, true);
-  assert.equal(result.pages, 52);
+  assert.equal(result.pages, 55);
   assert.deepEqual(result.errors, []);
   assert.match(await fs.readFile('dist/index.html', 'utf8'), /"gaId":""/);
 });

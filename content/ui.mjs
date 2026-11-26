@@ -25,6 +25,9 @@ export default {
     footerTagline: 'Listen. Learn. Remember.',
     copyLink: 'Copy link',
     linkCopied: 'Link copied',
+    priceNote: 'Free download. Transcripts, AI features, pins and sync are part of an optional Premium subscription: [see pricing](@pricing).',
+    disclosure: 'Published by Podpin, the maker of one of the apps compared. Facts about other apps come only from their official websites and help pages, checked on the date shown and linked under Sources. Read [about Podpin](@about) and [how we write comparisons](@editorial).',
+    browseAll: { features: 'All Podpin features', guides: 'All podcast guides', compare: 'All podcast app comparisons' },
   },
   es: {
     skip: 'Saltar',
@@ -52,6 +55,8 @@ export default {
     footerTagline: 'Escucha. Aprende. Recuerda.',
     copyLink: 'Copiar enlace',
     linkCopied: 'Enlace copiado',
+    priceNote: 'Descarga gratuita. Las transcripciones, las funciones de IA, los pins y la sincronización forman parte de una suscripción Premium opcional: [ver precios](@pricing) (en inglés).',
+    browseAll: { features: 'Todas las funciones de Podpin' },
   },
   fr: {
     skip: 'Passer',
@@ -79,6 +84,8 @@ export default {
     footerTagline: 'Écoutez. Apprenez. Retenez.',
     copyLink: 'Copier le lien',
     linkCopied: 'Lien copié',
+    priceNote: 'Téléchargement gratuit. Les transcriptions, les fonctions IA, les pins et la synchronisation font partie d’un abonnement Premium facultatif : [voir les tarifs](@pricing) (en anglais).',
+    browseAll: { features: 'Toutes les fonctionnalités de Podpin' },
   },
   de: {
     skip: 'Überspringen',
@@ -106,6 +113,8 @@ export default {
     footerTagline: 'Hören. Lernen. Erinnern.',
     copyLink: 'Link kopieren',
     linkCopied: 'Link kopiert',
+    priceNote: 'Kostenloser Download. Transkripte, KI-Funktionen, Pins und Synchronisierung gehören zu einem optionalen Premium-Abo: [Preise ansehen](@pricing) (auf Englisch).',
+    browseAll: { features: 'Alle Podpin-Funktionen' },
   },
   it: {
     skip: 'Salta',
